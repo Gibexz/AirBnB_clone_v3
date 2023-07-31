@@ -3,7 +3,7 @@
 module state.py
 """
 
-from flask import abort, jsonify, request
+from flask import abort, jsonify, request, make_response
 from models.state import State
 from api.v1.views import app_views
 from models import storage
@@ -41,7 +41,7 @@ def stateDeleteWithId(state_id):
     if state:
         storage.delete(state)
         storage.save()
-        return jsonify({}), 200
+        return make_response(jsonify({}), 200)
     else:
         abort(404)
 
@@ -62,7 +62,7 @@ def createState():
     storage.new(newStateObj)
     storage.save()
 
-    return jsonify(newStateObj.to_dict()), 201
+    return make_response(jsonify(newStateObj.to_dict()), 201)
 
 
 @app_views.route('/states/<string:state_id>', methods=['PUT'],
@@ -80,6 +80,6 @@ def updateState(state_id):
             if k not in ignoredKeys:
                 setattr(stateObj, k, v)
         storage.save()
-        return jsonify(stateObj.to_dict()), 200
+        return make_response(jsonify(stateObj.to_dict()), 200)
     else:
         abort(404)
