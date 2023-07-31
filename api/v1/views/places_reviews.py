@@ -4,9 +4,7 @@ module places_reviews.py
 """
 
 from flask import abort, jsonify, request
-from models.city import City
 from models.place import Place
-from models.user import User
 from models.review import Review
 from api.v1.views import app_views
 from models import storage
@@ -59,8 +57,6 @@ def createReview(place_id):
     place = storage.get(Place, place_id)
     if place:
         newReviewData = request.get_json()
-        if not newPlaceData.get('name'):
-            abort(400, description='Not a JSON')
 
         if not newReviewData.get('user_id'):
             abort(400, description='Missing user_id')
@@ -68,7 +64,7 @@ def createReview(place_id):
         review_userId = newReviewData.get('user_id')
         user = storage.get(User, review_userId)
         if not user:
-            abort(400)
+            abort(404)
         if not newReviewData.get('text'):
             abort(400, description='Missing text')
 
