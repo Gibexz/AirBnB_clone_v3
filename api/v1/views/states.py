@@ -58,7 +58,9 @@ def createState():
         abort(400, "Missing name")
 
     newStateObj = State(**newStateData)
-    newStateObj.save()
+    """newStateObj.save()"""
+    storage.new(newStateObj)
+    storage.save()
 
     return jsonify(newStateObj.to_dict()), 201
 
