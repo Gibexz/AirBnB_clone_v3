@@ -49,15 +49,15 @@ class FileStorage:
             json.dump(json_objects, f)
 
     def reload(self):
-        """deserializes the JSON file to __objects
+        """deserializes the JSON file to __objects"""
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass"""
-        from models.base_model import BaseModel
+        except Exception:
+            pass
+        """from models.base_model import BaseModel
         from models.user import User
         from models.place import Place
         from models.state import State
@@ -77,7 +77,7 @@ class FileStorage:
                 for key, val in temp.items():
                     self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
-            pass
+            pass"""
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
