@@ -101,7 +101,7 @@ class DBStorage:
         """method to count the number of objects in storage:"""
         new_dict = {}
         count = 0
-        if cls is not None:
+        if cls:
             objs = self.__session.query(cls).all()
             for obj in objs:
                 count += 1

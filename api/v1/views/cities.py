@@ -10,7 +10,7 @@ from api.v1.views import app_views
 from models import storage
 
 
-@app_views.route('/states/<string:state_id>/cities', methods=['GET'],
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
                  strict_slashes=False)
 def cityObjOfState(state_id):
     """Retrieves the list of all City objects of a State"""
@@ -24,7 +24,7 @@ def cityObjOfState(state_id):
     return jsonify(cityList)
 
 
-@app_views.route('/cities/<string:city_id>', methods=['GET'],
+@app_views.route('/cities/<city_id>', methods=['GET'],
                  strict_slashes=False)
 def cityObj(city_id):
     """Retrieves a City object."""
@@ -35,7 +35,7 @@ def cityObj(city_id):
         abort(404)
 
 
-@app_views.route('/cities/<string:city_id>', methods=['DELETE'],
+@app_views.route('/cities/<city_id>', methods=['DELETE'],
                  strict_slashes=False)
 def cityDeleteWithId(city_id):
     """Deletes a City object"""
@@ -58,7 +58,7 @@ def createCity(state_id):
     if state:
         newCityData = request.get_json()
         if not newCityData.get('name'):
-            abort(400, description='Not a JSON')
+            abort(400, description="Missing name")
 
         newCityData['state_id'] = state_id
 
