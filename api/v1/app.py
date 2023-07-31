@@ -14,23 +14,18 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown(exception):
-    """  """
+    """teardown context to close the session"""
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found(error):
+    """function to return error 404"""
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-"""@app.errorhandler(400)
-def notJson(error):
-    response = jsonify({'error': str(error.description)})
-    return response, 400"""
-
-
 if __name__ == "__main__":
-    """ """
+    """ main function """
     host = getenv('HBNB_API_HOST', '0.0.0.0')
     port = int(getenv('HBNB_API_PORT', 5000))
     app.run(host=host, port=port, threaded=True)
