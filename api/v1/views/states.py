@@ -26,15 +26,6 @@ def stateObjects():
                  strict_slashes=False)
 def stateObjectWithId(state_id):
     """Retrieves a State object"""
-    """ this code only prints the first id in the database
-    reason not studied
-    states = storage.all(State)
-    for state in states.values():
-        if state.id == state_id:
-            stateDict = state.to_dict()
-            return jsonify(stateDict)
-        else:
-            abort(404)"""
     state = storage.get(State, state_id)
     if state:
         return jsonify(state.to_dict())
