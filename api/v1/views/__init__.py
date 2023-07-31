@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+package initializer: init module
 """
 from flask import Blueprint
 

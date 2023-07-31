@@ -17,13 +17,13 @@ from models.user import User
 
 @app_views.route('/status')
 def status():
-    """ """
+    """ Returns the status of the page """
     return jsonify({'status': 'OK'})
 
 
 @app_views.route('/stats')
 def objCount():
-    """ """
+    """ Returns the number of each objects in storage """
     storage.reload()
 
     return jsonify({
