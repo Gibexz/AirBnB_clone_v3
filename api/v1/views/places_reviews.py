@@ -68,7 +68,7 @@ def createReview(place_id):
         if not newReviewData.get('text'):
             abort(400, description='Missing text')
 
-        newReviewData['place_id'] = city_id
+        newReviewData['place_id'] = place_id
 
         newReviewObj = Review(**newReviewData)
         storage.new(newReviewObj)
