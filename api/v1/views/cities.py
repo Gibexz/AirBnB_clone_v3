@@ -28,7 +28,7 @@ def cityObjOfState(state_id):
                  strict_slashes=False)
 def cityObj(city_id):
     """Retrieves a City object."""
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city:
         return jsonify(city.to_dict())
     else:
@@ -39,7 +39,7 @@ def cityObj(city_id):
                  strict_slashes=False)
 def cityDeleteWithId(city_id):
     """Deletes a City object"""
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city:
         storage.delete(city)
         storage.save()
@@ -54,7 +54,7 @@ def createCity(state_id):
     """Creates a City: POST /api/v1/states/<state_id>/cities"""
     if not request.is_json:
         abort(400, description="Not a JSON")
-    state = storage.get("Statei", state_id)
+    state = storage.get(State, state_id)
     if state:
         newCityData = request.get_json()
         if not newCityData.get('name'):
@@ -74,7 +74,7 @@ def createCity(state_id):
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
 def updateCity(city_id):
     """Updates a City object"""
-    cityObj = storage.get("City", city_id)
+    cityObj = storage.get(City, city_id)
     if cityObj:
         update = request.get_json()
         if not request.is_json:
