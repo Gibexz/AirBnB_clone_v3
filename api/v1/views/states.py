@@ -62,7 +62,7 @@ def createState():
     storage.new(newStateObj)
     storage.save()
 
-    return jsonify(newStateObj.to_dict()), 200
+    return jsonify(newStateObj.to_dict()), 201
 
 
 @app_views.route('/states/<string:state_id>', methods=['PUT'],
@@ -79,7 +79,7 @@ def updateState(state_id):
         for k, v in stateUpdateData.items():
             if k not in ignoredKeys:
                 setattr(stateObj, k, v)
-        stateObj.save()
+        storage.save()
         return jsonify(stateObj.to_dict()), 200
     else:
         abort(404)
