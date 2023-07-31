@@ -5,7 +5,7 @@ module: app.py
 
 from api.v1.views import app_views
 from flask import Flask, make_response, jsonify
-from flasK_cors import CORS
+from flask_cors import CORS
 from models import storage
 from os import getenv
 
