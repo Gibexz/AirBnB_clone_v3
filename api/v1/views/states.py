@@ -62,7 +62,7 @@ def createState():
     storage.new(newStateObj)
     storage.save()
 
-    return jsonify(newStateObj.to_dict()), 201
+    return jsonify(newStateObj.to_dict()), 200
 
 
 @app_views.route('/states/<string:state_id>', methods=['PUT'],
