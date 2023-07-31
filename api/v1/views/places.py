@@ -60,7 +60,7 @@ def createPlace(city_id):
     if city:
         newPlaceData = request.get_json()
         if not newPlaceData.get('name'):
-            abort(400, description='Not a JSON')
+            abort(400, description='Missing name')
 
         if not newPlaceData.get('user_id'):
             abort(400, description='Missing user_id')
@@ -68,7 +68,7 @@ def createPlace(city_id):
         place_userId = newPlaceData.get('user_id')
         user = storage.get(User, place_userId)
         if not user:
-            abort(400)
+            abort(404)
         newPlaceData['city_id'] = city_id
 
         newPlaceObj = Place(**newPlaceData)
