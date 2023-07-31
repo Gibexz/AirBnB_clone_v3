@@ -50,12 +50,12 @@ def stateDeleteWithId(state_id):
 def createState():
     """Creates a State: POST /api/v1/states"""
     if request.headers.get('Content-Type') != "application/json":
-        abort(400, description="Not a JSON")
+        abort(400, "Not a JSON")
 
     newStateData = request.get_json()
 
     if not newStateData.get("name"):
-        abort(400, description="Missing name")
+        abort(400, "Missing name")
 
     newStateObj = State(**newStateData)
     newStateObj.save()
@@ -68,7 +68,7 @@ def createState():
 def updateState(state_id):
     """Updates a State object: PUT /api/v1/states/<state_id>"""
     if not request.is_json:
-        abort(400, description="Not a JSON")
+        abort(400, "Not a JSON")
 
     stateUpdateData = request.get_json()
     stateObj = storage.get(State, state_id)
